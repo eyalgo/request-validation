@@ -2,11 +2,11 @@ package org.eyal.requestvalidation.model;
 
 import java.util.List;
 
-public class ItemsValidationResponse {
+public class ItemsFilterResponse {
 	private List<Item> validItems;
 	private List<InvalidItemInformation> invalidItemInformations;
 
-	public ItemsValidationResponse(List<Item> validItems, List<InvalidItemInformation> invalidItemInformations) {
+	public ItemsFilterResponse(List<Item> validItems, List<InvalidItemInformation> invalidItemInformations) {
 		this.validItems = validItems;
 		this.invalidItemInformations = invalidItemInformations;
 	}

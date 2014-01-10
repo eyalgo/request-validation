@@ -1,4 +1,4 @@
-package org.eyal.requestvalidation.validations;
+package org.eyal.requestvalidation.filter;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -8,9 +8,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import org.eyal.requestvalidation.filter.FiltersEngine;
+import org.eyal.requestvalidation.filter.filters.Filter;
 import org.eyal.requestvalidation.model.InvalidItemInformation;
 import org.eyal.requestvalidation.model.Item;
-import org.eyal.requestvalidation.model.ItemsValidationResponse;
+import org.eyal.requestvalidation.model.ItemsFilterResponse;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Before;
@@ -23,20 +25,20 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.google.common.collect.Lists;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ValidatorTest {
+public class FiltersEngineTest {
 	private final static String MESSAGE_FOR_VALIDATION_1 = "VALIDATION - 1 - ERROR";
 	private final static String MESSAGE_FOR_VALIDATION_2 = "VALIDATION - 2 - ERROR";
 	@Mock(name = "validation 1")
-	private Validation singleValidation1;
+	private Filter singleValidation1;
 	@Mock(name = "validation 2")
-	private Validation singleValidation2;
+	private Filter singleValidation2;
 	@Mock(name = "item 1")
 	private Item item1;
 	@Mock(name = "item 2")
 	private Item item2;
 
 	@InjectMocks
-	private Validator validator;
+	private FiltersEngine validator;
 
 	@Before
 	public void setup() {
@@ -55,7 +57,7 @@ public class ValidatorTest {
 		when(singleValidation2.apply(item1)).thenReturn(true);
 		when(singleValidation2.apply(item2)).thenReturn(true);
 
-		ItemsValidationResponse response = validator.validate(Lists.newArrayList(singleValidation1, singleValidation2),
+		ItemsFilterResponse response = validator.validate(Lists.newArrayList(singleValidation1, singleValidation2),
 				Lists.newArrayList(item1, item2));
 		assertThat("expected no invalid", response.getInvalidItemsInformations(),
 				emptyCollectionOf(InvalidItemInformation.class));
@@ -75,7 +77,7 @@ public class ValidatorTest {
 		when(singleValidation1.apply(item2)).thenReturn(true);
 		when(singleValidation2.apply(item2)).thenReturn(false);
 
-		ItemsValidationResponse response = validator.validate(Lists.newArrayList(singleValidation1, singleValidation2),
+		ItemsFilterResponse response = validator.validate(Lists.newArrayList(singleValidation1, singleValidation2),
 				Lists.newArrayList(item1, item2));
 		assertThat(
 				response.getInvalidItemsInformations(),
@@ -98,7 +100,7 @@ public class ValidatorTest {
 		when(singleValidation2.apply(item1)).thenReturn(false);
 		when(singleValidation2.apply(item2)).thenReturn(true);
 
-		ItemsValidationResponse response = validator.validate(Lists.newArrayList(singleValidation1, singleValidation2),
+		ItemsFilterResponse response = validator.validate(Lists.newArrayList(singleValidation1, singleValidation2),
 				Lists.newArrayList(item1, item2));
 		assertThat(response.getInvalidItemsInformations(), contains(matchInvalidInformation(new InvalidItemInformation(item1,
 				MESSAGE_FOR_VALIDATION_2))));
