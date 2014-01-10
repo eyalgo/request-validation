@@ -57,7 +57,7 @@ public class FiltersEngineTest {
 		when(singleValidation2.apply(item1)).thenReturn(true);
 		when(singleValidation2.apply(item2)).thenReturn(true);
 
-		ItemsFilterResponse response = validator.validate(Lists.newArrayList(singleValidation1, singleValidation2),
+		ItemsFilterResponse response = validator.applyFilters(Lists.newArrayList(singleValidation1, singleValidation2),
 				Lists.newArrayList(item1, item2));
 		assertThat("expected no invalid", response.getInvalidItemsInformations(),
 				emptyCollectionOf(InvalidItemInformation.class));
@@ -77,7 +77,7 @@ public class FiltersEngineTest {
 		when(singleValidation1.apply(item2)).thenReturn(true);
 		when(singleValidation2.apply(item2)).thenReturn(false);
 
-		ItemsFilterResponse response = validator.validate(Lists.newArrayList(singleValidation1, singleValidation2),
+		ItemsFilterResponse response = validator.applyFilters(Lists.newArrayList(singleValidation1, singleValidation2),
 				Lists.newArrayList(item1, item2));
 		assertThat(
 				response.getInvalidItemsInformations(),
@@ -100,7 +100,7 @@ public class FiltersEngineTest {
 		when(singleValidation2.apply(item1)).thenReturn(false);
 		when(singleValidation2.apply(item2)).thenReturn(true);
 
-		ItemsFilterResponse response = validator.validate(Lists.newArrayList(singleValidation1, singleValidation2),
+		ItemsFilterResponse response = validator.applyFilters(Lists.newArrayList(singleValidation1, singleValidation2),
 				Lists.newArrayList(item1, item2));
 		assertThat(response.getInvalidItemsInformations(), contains(matchInvalidInformation(new InvalidItemInformation(item1,
 				MESSAGE_FOR_VALIDATION_2))));

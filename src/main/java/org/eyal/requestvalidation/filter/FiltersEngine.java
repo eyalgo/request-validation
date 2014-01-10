@@ -14,7 +14,7 @@ public class FiltersEngine {
 	public FiltersEngine() {
 	}
 
-	public ItemsFilterResponse validate(List<Filter> filters, List<Item> items) {
+	public ItemsFilterResponse applyFilters(List<Filter> filters, List<Item> items) {
 		List<Item> validItems = Lists.newLinkedList(items);
 		List<InvalidItemInformation> invalidItemInformations = Lists.newLinkedList();
 		for (Filter validator : filters) {
