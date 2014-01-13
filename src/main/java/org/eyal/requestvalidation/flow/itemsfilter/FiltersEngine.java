@@ -1,8 +1,8 @@
-package org.eyal.requestvalidation.filter;
+package org.eyal.requestvalidation.flow.itemsfilter;
 
 import java.util.List;
 
-import org.eyal.requestvalidation.filter.filters.Filter;
+import org.eyal.requestvalidation.flow.itemsfilter.filters.Filter;
 import org.eyal.requestvalidation.model.InvalidItemInformation;
 import org.eyal.requestvalidation.model.Item;
 import org.eyal.requestvalidation.model.ItemsFilterResponse;

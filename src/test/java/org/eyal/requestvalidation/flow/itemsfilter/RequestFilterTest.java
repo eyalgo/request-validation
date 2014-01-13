@@ -1,4 +1,4 @@
-package org.eyal.requestvalidation.filter.flow;
+package org.eyal.requestvalidation.flow.itemsfilter;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -7,22 +7,26 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
-import org.eyal.requestvalidation.filter.FiltersEngine;
-import org.eyal.requestvalidation.filter.filters.Filter;
+import org.eyal.requestvalidation.flow.MapperByFlag;
+import org.eyal.requestvalidation.flow.itemsfilter.filters.Filter;
 import org.eyal.requestvalidation.model.Item;
 import org.eyal.requestvalidation.model.ItemsFilterResponse;
 import org.eyal.requestvalidation.model.Request;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RequestFilterTest {
 	@Mock
-	private ItemFiltersByFlagMapper filtersMapper;
+	private MapperByFlag<Filter> filtersMapper;
 	@Mock
 	private FiltersEngine filtersEngine;
+	
+	@InjectMocks
+	private RequestFilter requestFilter;
 	
 	@SuppressWarnings("unchecked")
     @Test
@@ -35,10 +39,8 @@ public class RequestFilterTest {
 		List<Filter> filters = mock(List.class);
 		ItemsFilterResponse response = mock(ItemsFilterResponse.class);
 		
-		when(filtersMapper.getFilters(request)).thenReturn(filters);
+		when(filtersMapper.getOperations(request)).thenReturn(filters);
 		when(filtersEngine.applyFilters(filters, items)).thenReturn(response);
-		
-		RequestFilter requestFilter = new RequestFilter(filtersMapper, filtersEngine);
 
 		assertThat(requestFilter.filter(request), equalTo(response));
 	}

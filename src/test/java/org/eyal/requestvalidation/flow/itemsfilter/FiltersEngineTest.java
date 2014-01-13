@@ -1,4 +1,4 @@
-package org.eyal.requestvalidation.filter;
+package org.eyal.requestvalidation.flow.itemsfilter;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -8,7 +8,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import org.eyal.requestvalidation.filter.filters.Filter;
+import org.eyal.requestvalidation.flow.itemsfilter.FiltersEngine;
+import org.eyal.requestvalidation.flow.itemsfilter.filters.Filter;
 import org.eyal.requestvalidation.model.InvalidItemInformation;
 import org.eyal.requestvalidation.model.Item;
 import org.eyal.requestvalidation.model.ItemsFilterResponse;

@@ -1,4 +1,4 @@
-package org.eyal.requestvalidation.filter.filters;
+package org.eyal.requestvalidation.flow.itemsfilter.filters;
 
 import org.eyal.requestvalidation.model.Item;
 
