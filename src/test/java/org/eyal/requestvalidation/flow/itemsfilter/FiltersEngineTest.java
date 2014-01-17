@@ -25,7 +25,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.google.common.collect.Lists;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FiltersEngineImplTest {
+public class FiltersEngineTest {
 	private final static String MESSAGE_FOR_FILTER_1 = "FILTER - 1 - ERROR";
 	private final static String MESSAGE_FOR_Filter_2 = "FILTER - 2 - ERROR";
 	@Mock(name = "filter 1")
@@ -41,7 +41,7 @@ public class FiltersEngineImplTest {
 	private Request request;
 
 	@InjectMocks
-	private FiltersEngineImpl filtersEngine;
+	private FiltersEngine filtersEngine;
 
 	@Before
 	public void setup() {

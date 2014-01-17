@@ -1,24 +1,13 @@
 package org.eyal.requestvalidation.flow.itemsfilter;
 
-import java.util.List;
-
+import org.eyal.requestvalidation.flow.AbstractFlowExecutor;
 import org.eyal.requestvalidation.flow.MapperByFlag;
 import org.eyal.requestvalidation.flow.itemsfilter.filters.Filter;
 import org.eyal.requestvalidation.model.ItemsFilterResponse;
-import org.eyal.requestvalidation.model.Request;
 
-public class FiltersExecutor {
+public class FiltersExecutor extends AbstractFlowExecutor<Filter, ItemsFilterResponse> {
 
-	private MapperByFlag<Filter> filtersMapper;
-	private FiltersEngineImpl filtersEngine;
-
-	public FiltersExecutor(MapperByFlag<Filter> filtersMapper, FiltersEngineImpl filtersEngine) {
-		this.filtersMapper = filtersMapper;
-		this.filtersEngine = filtersEngine;
-	}
-
-	public ItemsFilterResponse filter(Request request) {
-		List<Filter> filters = filtersMapper.getOperations(request);
-		return filtersEngine.applyOperations(filters, request);
+	public FiltersExecutor(MapperByFlag<Filter> filtersMapper, FiltersEngine filtersEngine) {
+		super(filtersMapper, filtersEngine);
 	}
 }

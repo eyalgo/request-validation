@@ -19,7 +19,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.google.common.collect.Lists;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RequestValidationsEngineImplTest {
+public class RequestValidationsEngineTest {
 	private final static String MESSAGE_FOR_VALIDATION_1="VALIDATION - 1 - ERROR";
 	private final static String MESSAGE_FOR_VALIDATION_2="VALIDATION - 2 - ERROR";
 	@Mock(name="validation 1")
@@ -33,7 +33,7 @@ public class RequestValidationsEngineImplTest {
 	private List<RequestValidation> validations;
 	
 	@InjectMocks
-	private RequestValidationsEngineImpl engine;
+	private RequestValidationsEngine engine;
 	
 	@Before
 	public void setup() {
