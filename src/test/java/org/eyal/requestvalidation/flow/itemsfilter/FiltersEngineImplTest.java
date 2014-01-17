@@ -61,7 +61,7 @@ public class FiltersEngineImplTest {
 		when(singleFilter2.apply(item1)).thenReturn(true);
 		when(singleFilter2.apply(item2)).thenReturn(true);
 
-		ItemsFilterResponse response = filtersEngine.applyFilters(Lists.newArrayList(singleFilter1, singleFilter2),
+		ItemsFilterResponse response = filtersEngine.applyOperations(Lists.newArrayList(singleFilter1, singleFilter2),
 				request);
 		assertThat("expected no invalid", response.getInvalidItemsInformations(),
 				emptyCollectionOf(InvalidItemInformation.class));
@@ -81,7 +81,7 @@ public class FiltersEngineImplTest {
 		when(singleFilter1.apply(item2)).thenReturn(true);
 		when(singleFilter2.apply(item2)).thenReturn(false);
 
-		ItemsFilterResponse response = filtersEngine.applyFilters(Lists.newArrayList(singleFilter1, singleFilter2),
+		ItemsFilterResponse response = filtersEngine.applyOperations(Lists.newArrayList(singleFilter1, singleFilter2),
 				request);
 		assertThat(
 				response.getInvalidItemsInformations(),
@@ -104,7 +104,7 @@ public class FiltersEngineImplTest {
 		when(singleFilter2.apply(item1)).thenReturn(false);
 		when(singleFilter2.apply(item2)).thenReturn(true);
 
-		ItemsFilterResponse response = filtersEngine.applyFilters(Lists.newArrayList(singleFilter1, singleFilter2),
+		ItemsFilterResponse response = filtersEngine.applyOperations(Lists.newArrayList(singleFilter1, singleFilter2),
 				request);
 		assertThat(response.getInvalidItemsInformations(), contains(matchInvalidInformation(new InvalidItemInformation(item1,
 				MESSAGE_FOR_Filter_2))));

@@ -16,10 +16,10 @@ public class FiltersEngineImpl implements FiltersEngine {
 	}
 
 	@Override
-	public ItemsFilterResponse applyFilters(List<Filter> filters, Request request) {
+	public ItemsFilterResponse applyOperations(List<Filter> operations, Request request) {
 		List<Item> validItems = Lists.newLinkedList(request.getItems());
 		List<InvalidItemInformation> invalidItemInformations = Lists.newLinkedList();
-		for (Filter validator : filters) {
+		for (Filter validator : operations) {
 			ItemsFilterResponse responseFromFilter = responseFromFilter(validItems, validator);
 			validItems = responseFromFilter.getValidItems();
 			invalidItemInformations.addAll(responseFromFilter.getInvalidItemsInformations());

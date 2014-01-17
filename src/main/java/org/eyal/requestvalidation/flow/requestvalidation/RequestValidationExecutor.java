@@ -19,7 +19,7 @@ public class RequestValidationExecutor {
 	
 	public ValidationResponse validate(Request request) {
 		List<RequestValidation> validations = mapper.getOperations(request);
-		return engine.applyValidations(validations, request);
+		return engine.applyOperations(validations, request);
 	}
 
 }

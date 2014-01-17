@@ -19,6 +19,6 @@ public class FiltersExecutor {
 
 	public ItemsFilterResponse filter(Request request) {
 		List<Filter> filters = filtersMapper.getOperations(request);
-		return filtersEngine.applyFilters(filters, request);
+		return filtersEngine.applyOperations(filters, request);
 	}
 }

@@ -30,7 +30,7 @@ public class RequestValidationExecutorTest {
 		ValidationResponse expectedValidationResponse = mock(ValidationResponse.class);
 		
 		when(mapper.getOperations(request)).thenReturn(validations);
-		when(engine.applyValidations(validations , request)).thenReturn(expectedValidationResponse);
+		when(engine.applyOperations(validations , request)).thenReturn(expectedValidationResponse);
 		
 		RequestValidationExecutor requestFlowValidation = new RequestValidationExecutor(mapper, engine);
 		ValidationResponse validationResponse = requestFlowValidation.validate(request);
@@ -38,7 +38,7 @@ public class RequestValidationExecutorTest {
 		
 		InOrder order = inOrder(mapper, engine);
 		order.verify(mapper).getOperations(request);
-		order.verify(engine).applyValidations(validations, request);
+		order.verify(engine).applyOperations(validations, request);
 		verifyNoMoreInteractions(mapper, engine);
 	}
 

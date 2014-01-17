@@ -14,7 +14,7 @@ public class RequestValidationsEngineImpl implements RequestValidationsEngine {
 	}
 
 	@Override
-	public ValidationResponse applyValidations(List<RequestValidation> validations, Request request) {
+	public ValidationResponse applyOperations(List<RequestValidation> validations, Request request) {
 		List<String> errorMessages = Lists.newLinkedList();
 		for (RequestValidation validation : validations) {
 	        if (!validation.apply(request)) {

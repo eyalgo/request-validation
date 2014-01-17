@@ -36,7 +36,7 @@ public class FiltersExecutorTest {
 		ItemsFilterResponse response = mock(ItemsFilterResponse.class);
 		
 		when(filtersMapper.getOperations(request)).thenReturn(filters);
-		when(filtersEngine.applyFilters(filters, request)).thenReturn(response);
+		when(filtersEngine.applyOperations(filters, request)).thenReturn(response);
 
 		assertThat(requestFilter.filter(request), equalTo(response));
 	}

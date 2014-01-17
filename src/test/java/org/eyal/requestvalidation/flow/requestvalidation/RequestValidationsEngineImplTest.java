@@ -48,7 +48,7 @@ public class RequestValidationsEngineImplTest {
 		when(validation1.apply(request)).thenReturn(true);
 		when(validation2.apply(request)).thenReturn(true);
 		
-		 ValidationResponse response = engine.applyValidations(validations, request);
+		 ValidationResponse response = engine.applyOperations(validations, request);
 		 assertThat(response.getStatus(), equalTo(ValidationResponseStatus.OK));
 	}
 	
@@ -58,7 +58,7 @@ public class RequestValidationsEngineImplTest {
 		when(validation2.apply(request)).thenReturn(false);
 		
 		List<String> expectedMessgaes = Lists.newArrayList(MESSAGE_FOR_VALIDATION_2);
-		ValidationResponse response = engine.applyValidations(validations, request);
+		ValidationResponse response = engine.applyOperations(validations, request);
 		assertThat(response.getStatus(), equalTo(ValidationResponseStatus.NOT_OK));
 		assertThat(response.getMessages(), equalTo(expectedMessgaes));
 		
@@ -71,7 +71,7 @@ public class RequestValidationsEngineImplTest {
 		when(validation2.apply(request)).thenReturn(false);
 		
 		List<String> expectedMessgaes = Lists.newArrayList(MESSAGE_FOR_VALIDATION_1, MESSAGE_FOR_VALIDATION_2);
-		ValidationResponse response = engine.applyValidations(validations, request);
+		ValidationResponse response = engine.applyOperations(validations, request);
 		assertThat(response.getStatus(), equalTo(ValidationResponseStatus.NOT_OK));
 		assertThat(response.getMessages(), equalTo(expectedMessgaes));
 		
