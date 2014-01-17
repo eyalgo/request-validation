@@ -18,7 +18,7 @@ import org.mockito.InOrder;
 
 
 
-public class RequestFlowValidationTest {
+public class RequestValidationExecutorTest {
 	
 	@SuppressWarnings("unchecked")
 	@Test
@@ -32,7 +32,7 @@ public class RequestFlowValidationTest {
 		when(mapper.getOperations(request)).thenReturn(validations);
 		when(engine.applyValidations(validations , request)).thenReturn(expectedValidationResponse);
 		
-		RequestFlowValidation requestFlowValidation = new RequestFlowValidation(mapper, engine);
+		RequestValidationExecutor requestFlowValidation = new RequestValidationExecutor(mapper, engine);
 		ValidationResponse validationResponse = requestFlowValidation.validate(request);
 		assertThat("wrong validation response", validationResponse, equalTo(expectedValidationResponse));
 		

@@ -6,8 +6,8 @@ import java.util.Map;
 import org.eyal.requestvalidation.flow.AbstractMapperByFlag;
 import org.eyal.requestvalidation.flow.itemsfilter.filters.Filter;
 
-public class ItemFiltersByFlagMapper extends AbstractMapperByFlag<Filter> {
-	public ItemFiltersByFlagMapper(List<Filter> defaultFilters, Map<String, List<Filter>> mapOfFilters) {
+public class ItemFiltersMapperByFlag extends AbstractMapperByFlag<Filter> {
+	public ItemFiltersMapperByFlag(List<Filter> defaultFilters, Map<String, List<Filter>> mapOfFilters) {
 		super(defaultFilters, mapOfFilters);
 	}
 }

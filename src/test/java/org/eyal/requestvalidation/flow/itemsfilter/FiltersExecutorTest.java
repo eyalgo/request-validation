@@ -19,14 +19,14 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RequestFilterTest {
+public class FiltersExecutorTest {
 	@Mock
 	private MapperByFlag<Filter> filtersMapper;
 	@Mock
-	private FiltersEngine filtersEngine;
+	private FiltersEngineImpl filtersEngine;
 	
 	@InjectMocks
-	private RequestFilter requestFilter;
+	private FiltersExecutor requestFilter;
 	
 	@SuppressWarnings("unchecked")
     @Test

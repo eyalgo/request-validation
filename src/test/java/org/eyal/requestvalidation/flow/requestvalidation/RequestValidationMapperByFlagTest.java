@@ -1,4 +1,4 @@
-package org.eyal.requestvalidation.flow.itemsfilter;
+package org.eyal.requestvalidation.flow.requestvalidation;
 
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eyal.requestvalidation.flow.AbstractMapperByFlag;
-import org.eyal.requestvalidation.flow.itemsfilter.filters.Filter;
+import org.eyal.requestvalidation.flow.requestvalidation.validations.RequestValidation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -16,15 +16,16 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ItemFiltersByFlagMapperTest {
+public class RequestValidationMapperByFlagTest {
 
 	@Mock
-	private List<Filter> defaultFilters;
+	private List<RequestValidation> defaultValidations;
+    
 	@Mock
-	private Map<String, List<Filter>> mapOfFilters;
+	private Map<String, List<RequestValidation>> mapOfValidations;
 
 	@InjectMocks
-	private ItemFiltersByFlagMapper mapper;
+	private RequestValidationMapperByFlag mapper;
 
 	@SuppressWarnings("unchecked")
     @Test
@@ -32,12 +33,12 @@ public class ItemFiltersByFlagMapperTest {
 	        IllegalAccessException {
 		Field defaultOperationsField = AbstractMapperByFlag.class.getDeclaredField("defaultOperations");
 		defaultOperationsField.setAccessible(true);
-        List<Filter> actualFilters = (List<Filter>) defaultOperationsField.get(mapper);
-		assertThat(actualFilters, sameInstance(defaultFilters));
+        List<RequestValidation> actualFilters = (List<RequestValidation>) defaultOperationsField.get(mapper);
+		assertThat(actualFilters, sameInstance(defaultValidations));
 
 		Field mapOfFiltersField = AbstractMapperByFlag.class.getDeclaredField("mapOfOperations");
 		mapOfFiltersField.setAccessible(true);
-		Map<String, List<Filter>> actualMapOfFilters = (Map<String, List<Filter>>) mapOfFiltersField.get(mapper);
-		assertThat(actualMapOfFilters, sameInstance(mapOfFilters));
+		Map<String, List<RequestValidation>> actualMapOfFilters = (Map<String, List<RequestValidation>>) mapOfFiltersField.get(mapper);
+		assertThat(actualMapOfFilters, sameInstance(mapOfValidations));
 	}
 }

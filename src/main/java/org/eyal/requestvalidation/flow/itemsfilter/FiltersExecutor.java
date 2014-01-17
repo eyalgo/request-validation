@@ -7,12 +7,12 @@ import org.eyal.requestvalidation.flow.itemsfilter.filters.Filter;
 import org.eyal.requestvalidation.model.ItemsFilterResponse;
 import org.eyal.requestvalidation.model.Request;
 
-public class RequestFilter {
+public class FiltersExecutor {
 
 	private MapperByFlag<Filter> filtersMapper;
-	private FiltersEngine filtersEngine;
+	private FiltersEngineImpl filtersEngine;
 
-	public RequestFilter(MapperByFlag<Filter> filtersMapper, FiltersEngine filtersEngine) {
+	public FiltersExecutor(MapperByFlag<Filter> filtersMapper, FiltersEngineImpl filtersEngine) {
 		this.filtersMapper = filtersMapper;
 		this.filtersEngine = filtersEngine;
 	}

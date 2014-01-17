@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import org.eyal.requestvalidation.flow.itemsfilter.FiltersEngine;
+import org.eyal.requestvalidation.flow.itemsfilter.FiltersEngineImpl;
 import org.eyal.requestvalidation.flow.itemsfilter.filters.Filter;
 import org.eyal.requestvalidation.model.InvalidItemInformation;
 import org.eyal.requestvalidation.model.Item;
@@ -25,7 +25,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.google.common.collect.Lists;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FiltersEngineTest {
+public class FiltersEngineImplTest {
 	private final static String MESSAGE_FOR_FILTER_1 = "FILTER - 1 - ERROR";
 	private final static String MESSAGE_FOR_Filter_2 = "FILTER - 2 - ERROR";
 	@Mock(name = "filter 1")
@@ -38,7 +38,7 @@ public class FiltersEngineTest {
 	private Item item2;
 
 	@InjectMocks
-	private FiltersEngine filtersEngine;
+	private FiltersEngineImpl filtersEngine;
 
 	@Before
 	public void setup() {

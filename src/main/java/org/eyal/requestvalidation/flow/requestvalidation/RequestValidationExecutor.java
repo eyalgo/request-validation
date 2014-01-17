@@ -7,12 +7,12 @@ import org.eyal.requestvalidation.flow.requestvalidation.validations.RequestVali
 import org.eyal.requestvalidation.model.Request;
 import org.eyal.requestvalidation.model.ValidationResponse;
 
-public class RequestFlowValidation {
+public class RequestValidationExecutor {
 
 	private MapperByFlag<RequestValidation> mapper;
 	private RequestValidationsEngine engine;
 
-	public RequestFlowValidation(MapperByFlag<RequestValidation> mapper, RequestValidationsEngine engine) {
+	public RequestValidationExecutor(MapperByFlag<RequestValidation> mapper, RequestValidationsEngine engine) {
 		this.mapper = mapper;
 		this.engine = engine;
 	}
