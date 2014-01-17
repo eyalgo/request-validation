@@ -6,6 +6,7 @@ import org.eyal.requestvalidation.flow.itemsfilter.filters.Filter;
 import org.eyal.requestvalidation.model.InvalidItemInformation;
 import org.eyal.requestvalidation.model.Item;
 import org.eyal.requestvalidation.model.ItemsFilterResponse;
+import org.eyal.requestvalidation.model.Request;
 
 import com.google.common.collect.Lists;
 
@@ -15,8 +16,8 @@ public class FiltersEngineImpl implements FiltersEngine {
 	}
 
 	@Override
-	public ItemsFilterResponse applyFilters(List<Filter> filters, List<Item> items) {
-		List<Item> validItems = Lists.newLinkedList(items);
+	public ItemsFilterResponse applyFilters(List<Filter> filters, Request request) {
+		List<Item> validItems = Lists.newLinkedList(request.getItems());
 		List<InvalidItemInformation> invalidItemInformations = Lists.newLinkedList();
 		for (Filter validator : filters) {
 			ItemsFilterResponse responseFromFilter = responseFromFilter(validItems, validator);

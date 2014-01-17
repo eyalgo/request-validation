@@ -8,11 +8,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import org.eyal.requestvalidation.flow.itemsfilter.FiltersEngineImpl;
 import org.eyal.requestvalidation.flow.itemsfilter.filters.Filter;
 import org.eyal.requestvalidation.model.InvalidItemInformation;
 import org.eyal.requestvalidation.model.Item;
 import org.eyal.requestvalidation.model.ItemsFilterResponse;
+import org.eyal.requestvalidation.model.Request;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Before;
@@ -36,6 +36,9 @@ public class FiltersEngineImplTest {
 	private Item item1;
 	@Mock(name = "item 2")
 	private Item item2;
+	
+	@Mock
+	private Request request;
 
 	@InjectMocks
 	private FiltersEngineImpl filtersEngine;
@@ -46,8 +49,9 @@ public class FiltersEngineImplTest {
 		when(singleFilter2.errorMessage()).thenReturn(MESSAGE_FOR_Filter_2);
 
 		when(item1.getName()).thenReturn("name1");
-
 		when(item2.getName()).thenReturn("name2");
+		
+		when(request.getItems()).thenReturn(Lists.newArrayList(item1, item2));
 	}
 
 	@Test
@@ -58,7 +62,7 @@ public class FiltersEngineImplTest {
 		when(singleFilter2.apply(item2)).thenReturn(true);
 
 		ItemsFilterResponse response = filtersEngine.applyFilters(Lists.newArrayList(singleFilter1, singleFilter2),
-				Lists.newArrayList(item1, item2));
+				request);
 		assertThat("expected no invalid", response.getInvalidItemsInformations(),
 				emptyCollectionOf(InvalidItemInformation.class));
 		assertThat(response.getValidItems(), containsInAnyOrder(item1, item2));
@@ -78,7 +82,7 @@ public class FiltersEngineImplTest {
 		when(singleFilter2.apply(item2)).thenReturn(false);
 
 		ItemsFilterResponse response = filtersEngine.applyFilters(Lists.newArrayList(singleFilter1, singleFilter2),
-				Lists.newArrayList(item1, item2));
+				request);
 		assertThat(
 				response.getInvalidItemsInformations(),
 				containsInAnyOrder(matchInvalidInformation(new InvalidItemInformation(item1, MESSAGE_FOR_FILTER_1)),
@@ -101,7 +105,7 @@ public class FiltersEngineImplTest {
 		when(singleFilter2.apply(item2)).thenReturn(true);
 
 		ItemsFilterResponse response = filtersEngine.applyFilters(Lists.newArrayList(singleFilter1, singleFilter2),
-				Lists.newArrayList(item1, item2));
+				request);
 		assertThat(response.getInvalidItemsInformations(), contains(matchInvalidInformation(new InvalidItemInformation(item1,
 				MESSAGE_FOR_Filter_2))));
 		assertThat(response.getValidItems(), containsInAnyOrder(item2));

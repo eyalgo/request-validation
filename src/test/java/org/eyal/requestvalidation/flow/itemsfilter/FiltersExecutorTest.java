@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.eyal.requestvalidation.flow.MapperByFlag;
 import org.eyal.requestvalidation.flow.itemsfilter.filters.Filter;
-import org.eyal.requestvalidation.model.Item;
 import org.eyal.requestvalidation.model.ItemsFilterResponse;
 import org.eyal.requestvalidation.model.Request;
 import org.junit.Test;
@@ -31,16 +30,13 @@ public class FiltersExecutorTest {
 	@SuppressWarnings("unchecked")
     @Test
 	public void verifyCallToMapperEngineShouldReturnResponse() {
-		
-		List<Item> items = mock(List.class);
 		Request request = mock(Request.class);
-		when(request.getItems()).thenReturn(items);
 		
 		List<Filter> filters = mock(List.class);
 		ItemsFilterResponse response = mock(ItemsFilterResponse.class);
 		
 		when(filtersMapper.getOperations(request)).thenReturn(filters);
-		when(filtersEngine.applyFilters(filters, items)).thenReturn(response);
+		when(filtersEngine.applyFilters(filters, request)).thenReturn(response);
 
 		assertThat(requestFilter.filter(request), equalTo(response));
 	}
