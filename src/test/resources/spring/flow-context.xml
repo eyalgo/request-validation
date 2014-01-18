@@ -16,7 +16,7 @@
     <import resource="classpath:spring/flow-filter-context.xml"/>
 
     <bean id="flow"
-        class="org.eyal.requestvalidation.flow.itemsfilter.filters.Filter.Flow">
+        class="org.eyal.requestvalidation.flow.Flow">
         <constructor-arg ref="validationsExecutor" />
         <constructor-arg ref="filtersExecutor" />
     </bean>
