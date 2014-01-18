@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+
+    <context:annotation-config />
+    <context:property-placeholder location="classpath:spring/flow.properties" />
+
+    <bean id="evenIdFilter"
+        class="org.eyal.requestvalidation.flow.example.flow.itemsfilter.filters.EvenIdFilter">
+    </bean>
+
+    <bean id="oddIdFilter"
+        class="org.eyal.requestvalidation.flow.example.flow.itemsfilter.filters.OddIdFilter">
+    </bean>
+
+    <bean id="longNameExternalFilter"
+        class="org.eyal.requestvalidation.flow.example.flow.itemsfilter.filters.NameTooLongFilter">
+        <constructor-arg value="${filter.external.name.max}" />
+    </bean>
+
+    <bean id="longNameInternalFilter"
+        class="org.eyal.requestvalidation.flow.example.flow.itemsfilter.filters.NameTooLongFilter">
+        <constructor-arg value="${filter.internal.name.max}" />
+    </bean>
+
+    <bean id="shortNameExternalFilter"
+        class="org.eyal.requestvalidation.flow.example.flow.itemsfilter.filters.NameTooShortFilter">
+        <constructor-arg value="${filter.external.name.min}" />
+    </bean>
+
+    <bean id="shortNameInternalFilter"
+        class="org.eyal.requestvalidation.flow.example.flow.itemsfilter.filters.NameTooShortFilter">
+        <constructor-arg value="${filter.internal.name.min}" />
+    </bean>
+    
+    <bean id="emptyNameFilter"
+        class="org.eyal.requestvalidation.flow.example.flow.itemsfilter.filters.EmptyNameFilter">
+    </bean>
+
+    <util:list id="filtersForExternal">
+        <ref bean="longNameExternalFilter" />
+        <ref bean="shortNameExternalFilter" />
+    </util:list>
+
+    <util:list id="filtersForInternal">
+        <ref bean="longNameInternalFilter" />
+        <ref bean="shortNameInternalFilter" />
+    </util:list>
+
+    <util:list id="filtersForEven">
+        <ref bean="evenIdFilter" />
+    </util:list>
+
+    <util:list id="filtersForOdd">
+        <ref bean="oddIdFilter" />
+    </util:list>
+
+    <util:map id="filtersByFlag">
+        <entry key="${flag.external}" value-ref="filtersForExternal" />
+        <entry key="${flag.internal}" value-ref="filtersForInternal" />
+        <entry key="${flag.even}" value-ref="filtersForEven" />
+        <entry key="${flag.odd}" value-ref="filtersForOdd" />
+    </util:map>
+
+    <util:list id="defaultFilters">
+        <ref bean="emptyNameFilter" />
+    </util:list>
+
+    <bean id="itemFiltersMapperByFlag"
+        class="org.eyal.requestvalidation.flow.itemsfilter.ItemFiltersMapperByFlag">
+        <constructor-arg ref="defaultFilters" />
+        <constructor-arg ref="filtersByFlag" />
+    </bean>
+
+    <bean id="filtersEngine"
+        class="org.eyal.requestvalidation.flow.itemsfilter.FiltersEngine">
+    </bean>
+
+    <bean id="filtersExecutor"
+        class="org.eyal.requestvalidation.flow.itemsfilter.FiltersExecutor">
+        <constructor-arg ref="itemFiltersMapperByFlag" />
+        <constructor-arg ref="filtersEngine" />
+    </bean>
+</beans>

@@ -1,4 +1,4 @@
-package org.eyal.requestvalidation.flow.example.wiring;
+package org.eyal.requestvalidation.flow.example.flow;
 
 import org.eyal.requestvalidation.flow.Flow;
 import org.eyal.requestvalidation.model.Request;
