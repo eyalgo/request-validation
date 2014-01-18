@@ -7,4 +7,6 @@ public interface Request {
 	Set<String> getFlags();
 
 	List<Item> getItems();
+	
+	String getId();
 }
