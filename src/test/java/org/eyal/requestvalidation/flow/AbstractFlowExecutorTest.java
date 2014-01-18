@@ -25,7 +25,7 @@ public class AbstractFlowExecutorTest {
 
 	@Before
 	public void setup() {
-		executor = new AbstractFlowExecutor<AbstractFlowExecutorTest.DummyOperation, Integer>(mapper, engine) {
+		executor = new AbstractFlowExecutor<DummyOperation, Integer>(mapper, engine) {
 		};
 	}
 
